@@ -1,13 +1,11 @@
+import Board from "@/components/Board";
 import Header from "@/components/Header";
 
 export default function Home() {
   return (
-    <div>
-      {/* Header */}
+    <main>
       <Header />
-
-      {/* Board */}
-      <h1>Hello World</h1>
-    </div>
+      <Board />
+    </main>
   );
 }
