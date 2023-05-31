@@ -19,8 +19,16 @@ const idToColumnText: {
 };
 
 const Column = ({ id, todos, index }: Props) => {
-  const [searchString] = useBoardStore((state) => [state.searchString]);
+  const [searchString, setNewTaskType] = useBoardStore((state) => [
+    state.searchString,
+    state.setNewTaskType,
+  ]);
   const openModal = useModalStore((state) => state.openModal);
+
+  const handleAddTodo = () => {
+    setNewTaskType(id);
+    openModal();
+  };
 
   return (
     <Draggable draggableId={id} index={index}>
@@ -40,7 +48,7 @@ const Column = ({ id, todos, index }: Props) => {
                   snapshot.isDraggingOver ? "bg-green-200" : "bg-white/50"
                 }`}
               >
-                <h2 className="flex justify-between font-bold text-xl">
+                <h2 className="flex justify-between font-bold text-xl p-2">
                   {idToColumnText[id]}
                   <span className="text-gray-500 bg-gray-200 rounded-full px-2 py-1 text-sm font-normal">
                     {!searchString
@@ -86,7 +94,7 @@ const Column = ({ id, todos, index }: Props) => {
 
                   <div className="flex items-end justify-end p-2">
                     <button
-                      onClick={openModal}
+                      onClick={handleAddTodo}
                       className="text-green-500 hover:text-green-600"
                     >
                       <PlusCircleIcon className="w-10 h-10" />
